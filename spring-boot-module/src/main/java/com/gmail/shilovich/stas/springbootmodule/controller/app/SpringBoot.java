@@ -1,13 +1,11 @@
-package com.gmail.shilovich.stas.servicemodule;
+package com.gmail.shilovich.stas.springbootmodule.controller.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServiceModuleApplication {
-
+public class SpringBoot {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceModuleApplication.class, args);
+        SpringApplication.run(SpringBoot.class, args);
     }
-
 }

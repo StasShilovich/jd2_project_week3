@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -48,9 +49,31 @@ public class ConnectorHandler {
 
     @PostConstruct
     public void createDatabaseTables() {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS t_item(f_id INT NOT NULL AUTO_INCREMENT," +
+                " f_name  VARCHAR(40) NOT NULL, f_status VARCHAR(45) NOT NULL," +
+                " f_deleted TINYINT NOT NULL, PRIMARY KEY (f_id))";
+        executeQuery(createTableQuery);
     }
 
     @PostConstruct
     public void insertDatabaseStartParameters() {
+        String createTableQuery = "INSERT INTO t_item(f_id, f_name, f_status, f_deleted)" +
+                " VALUES (1, 'Test Item','ready',0)";
+        executeQuery(createTableQuery);
+    }
+
+    private void executeQuery(String createTableQuery) {
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(createTableQuery);
+                connection.commit();
+            } catch (Exception e) {
+                connection.rollback();
+            }
+        } catch (SQLException e) {
+            logger.error(ERROR_MESSAGE, e);
+            throw new DatabaseException(ERROR_MESSAGE);
+        }
     }
 }
