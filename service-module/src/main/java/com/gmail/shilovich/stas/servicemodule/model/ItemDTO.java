@@ -1,16 +1,16 @@
 package com.gmail.shilovich.stas.servicemodule.model;
 
-import com.gmail.shilovich.stas.datamodule.model.Status;
+import com.gmail.shilovich.stas.datamodule.model.ItemStatusEnum;
 
 public class ItemDTO {
     private Long id;
     private String name;
-    private Status status;
+    private ItemStatusEnum itemStatusEnum;
 
-    public ItemDTO(Long id, String name, Status status) {
+    public ItemDTO(Long id, String name, ItemStatusEnum itemStatusEnum) {
         this.id = id;
         this.name = name;
-        this.status = status;
+        this.itemStatusEnum = itemStatusEnum;
     }
 
     public ItemDTO() {
@@ -32,11 +32,11 @@ public class ItemDTO {
         this.name = name;
     }
 
-    public Status getStatus() {
-        return status;
+    public ItemStatusEnum getItemStatusEnum() {
+        return itemStatusEnum;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setItemStatusEnum(ItemStatusEnum itemStatusEnum) {
+        this.itemStatusEnum = itemStatusEnum;
     }
 }

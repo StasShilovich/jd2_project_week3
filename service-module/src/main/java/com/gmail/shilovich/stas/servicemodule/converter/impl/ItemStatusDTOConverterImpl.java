@@ -11,7 +11,7 @@ public class ItemStatusDTOConverterImpl implements ItemStatusDTOConverter {
     public Item fromDTO(ItemStatusDTO itemStatusDTO) {
         Item item=new Item();
         item.setId(itemStatusDTO.getId());
-        item.setStatus(itemStatusDTO.getStatus());
+        item.setItemStatusEnum(itemStatusDTO.getItemStatusEnum());
         return item;
     }
 }

@@ -1,4 +1,4 @@
-package com.gmail.shilovich.stas.springbootmodule.controller.model;
+package com.gmail.shilovich.stas.springbootmodule.model;
 
 import com.sun.istack.internal.NotNull;
 

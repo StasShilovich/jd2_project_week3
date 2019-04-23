@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <data-module.version>0.0.1-SNAPSHOT</data-module.version>
     </properties>
 
     <dependencies>
@@ -26,7 +27,7 @@
         <dependency>
             <groupId>com.gmail.shilovich.stas</groupId>
             <artifactId>data-module</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${data-module.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

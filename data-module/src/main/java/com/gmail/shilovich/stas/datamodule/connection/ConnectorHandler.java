@@ -69,6 +69,7 @@ public class ConnectorHandler {
                 statement.execute(createTableQuery);
                 connection.commit();
             } catch (Exception e) {
+                logger.error(ERROR_MESSAGE, e);
                 connection.rollback();
             }
         } catch (SQLException e) {

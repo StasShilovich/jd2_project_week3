@@ -1,12 +1,12 @@
 package com.gmail.shilovich.stas.datamodule.model;
 
-public enum Status {
+public enum ItemStatusEnum {
     READY("ready"),
     COMPLETED("completed");
 
     private String statusName;
 
-    Status(String statusName) {
+    ItemStatusEnum(String statusName) {
         this.statusName = statusName;
     }
 

@@ -3,7 +3,7 @@ package com.gmail.shilovich.stas.servicemodule.impl;
 import com.gmail.shilovich.stas.datamodule.ItemRepository;
 import com.gmail.shilovich.stas.datamodule.connection.ConnectorHandler;
 import com.gmail.shilovich.stas.datamodule.model.Item;
-import com.gmail.shilovich.stas.datamodule.model.Status;
+import com.gmail.shilovich.stas.datamodule.model.ItemStatusEnum;
 import com.gmail.shilovich.stas.servicemodule.ItemService;
 import com.gmail.shilovich.stas.servicemodule.converter.ItemConverter;
 import com.gmail.shilovich.stas.servicemodule.converter.ItemDTOConverter;
@@ -70,10 +70,14 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> getItems() {
         List<Item> items = null;
+        List<ItemDTO> list = null;
         try (Connection connection = connectorHandler.getConnection()) {
             try {
                 connection.setAutoCommit(false);
                 items = itemRepository.getItems(connection);
+                list = items.stream()
+                        .map(itemConverter::toDTO)
+                        .collect(Collectors.toList());
                 connection.commit();
             } catch (SQLException e) {
                 logger.error(ERROR_MESSAGE, e);
@@ -84,15 +88,12 @@ public class ItemServiceImpl implements ItemService {
             logger.error(ERROR_MESSAGE, e);
             throw new ServiceException(ERROR_MESSAGE, e);
         }
-        List<ItemDTO> list = items.stream()
-                .map(itemConverter::toDTO)
-                .collect(Collectors.toList());
         return list;
     }
 
     @Override
     public int update(Long id, String status) {
-        ItemStatusDTO itemStatusDTO = new ItemStatusDTO(id, Status.valueOf(status));
+        ItemStatusDTO itemStatusDTO = new ItemStatusDTO(id, ItemStatusEnum.valueOf(status));
         Item item = itemStatusDTOConverter.fromDTO(itemStatusDTO);
         int rowsUpdate = 0;
         try (Connection connection = connectorHandler.getConnection()) {

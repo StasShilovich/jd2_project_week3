@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 public class ItemDTOConverterImpl implements ItemDTOConverter {
     @Override
     public Item fromDTO(ItemDTO itemDTO) {
-        Item item=new Item();
+        Item item = new Item();
         item.setId(itemDTO.getId());
         item.setName(itemDTO.getName());
-        item.setStatus(itemDTO.getStatus());
+        item.setItemStatusEnum(itemDTO.getItemStatusEnum());
         return item;
     }
 }

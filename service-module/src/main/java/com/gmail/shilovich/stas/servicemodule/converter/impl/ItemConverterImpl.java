@@ -13,7 +13,7 @@ public class ItemConverterImpl implements ItemConverter {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setId(item.getId());
         itemDTO.setName(item.getName());
-        itemDTO.setStatus(item.getStatus());
+        itemDTO.setItemStatusEnum(item.getItemStatusEnum());
         return itemDTO;
     }
 
@@ -21,7 +21,7 @@ public class ItemConverterImpl implements ItemConverter {
     public ItemStatusDTO toStatusDTO(Item item) {
         ItemStatusDTO itemStatusDTO = new ItemStatusDTO();
         itemStatusDTO.setId(item.getId());
-        itemStatusDTO.setStatus(item.getStatus());
+        itemStatusDTO.setItemStatusEnum(item.getItemStatusEnum());
         return itemStatusDTO;
     }
 }

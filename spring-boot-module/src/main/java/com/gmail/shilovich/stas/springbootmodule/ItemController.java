@@ -1,4 +1,4 @@
-package com.gmail.shilovich.stas.springbootmodule.controller;
+package com.gmail.shilovich.stas.springbootmodule;
 
 import com.gmail.shilovich.stas.servicemodule.ItemService;
 import com.gmail.shilovich.stas.servicemodule.model.ItemDTO;

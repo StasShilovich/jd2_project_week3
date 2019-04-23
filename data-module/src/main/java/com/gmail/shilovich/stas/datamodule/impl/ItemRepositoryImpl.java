@@ -4,13 +4,17 @@ import com.gmail.shilovich.stas.datamodule.ItemRepository;
 import com.gmail.shilovich.stas.datamodule.connection.ConnectorHandler;
 import com.gmail.shilovich.stas.datamodule.exception.DatabaseException;
 import com.gmail.shilovich.stas.datamodule.model.Item;
-import com.gmail.shilovich.stas.datamodule.model.Status;
+import com.gmail.shilovich.stas.datamodule.model.ItemStatusEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +35,12 @@ public class ItemRepositoryImpl implements ItemRepository {
     public Item add(Connection connection, Item item) {
         Item newItem = new Item();
         newItem.setName(item.getName());
-        newItem.setStatus(item.getStatus());
+        newItem.setItemStatusEnum(item.getItemStatusEnum());
         newItem.setDeleted(item.getDeleted());
         String sql = "INSERT INTO t_item(f_name,f_status,f_deleted) VALUES(?,?,?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            statement.setString(2, item.getStatus().getStatusName());
+            statement.setString(2, item.getItemStatusEnum().getStatusName());
             int deleted = 0;
             if (item.getDeleted()) {
                 deleted = 1;
@@ -83,7 +87,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         int rows = 0;
         String sql = "UPDATE t_item SET f_status=? WHERE f_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, item.getStatus().getStatusName());
+            statement.setString(1, item.getItemStatusEnum().getStatusName());
             statement.setString(2, item.getId().toString());
             rows = statement.executeUpdate();
             if (rows == 0) {
@@ -101,7 +105,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         item.setId(set.getLong("f_id"));
         item.setName(set.getString("f_name"));
         String status = set.getString("f_status").toUpperCase();
-        item.setStatus(Status.valueOf(status));
+        item.setItemStatusEnum(ItemStatusEnum.valueOf(status));
         int deleted = set.getInt("f_deleted");
         if (deleted == 0) {
             item.setDeleted(false);

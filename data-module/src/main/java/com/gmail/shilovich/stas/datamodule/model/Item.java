@@ -3,13 +3,13 @@ package com.gmail.shilovich.stas.datamodule.model;
 public class Item {
     private Long id;
     private String name;
-    private Status status;
+    private ItemStatusEnum itemStatusEnum;
     private Boolean deleted;
 
-    public Item(Long id, String name, Status status, Boolean deleted) {
+    public Item(Long id, String name, ItemStatusEnum itemStatusEnum, Boolean deleted) {
         this.id = id;
         this.name = name;
-        this.status = status;
+        this.itemStatusEnum = itemStatusEnum;
         this.deleted = deleted;
     }
 
@@ -32,12 +32,12 @@ public class Item {
         this.name = name;
     }
 
-    public Status getStatus() {
-        return status;
+    public ItemStatusEnum getItemStatusEnum() {
+        return itemStatusEnum;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setItemStatusEnum(ItemStatusEnum itemStatusEnum) {
+        this.itemStatusEnum = itemStatusEnum;
     }
 
     public Boolean getDeleted() {
@@ -53,7 +53,7 @@ public class Item {
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", status=" + status +
+                ", itemStatusEnum=" + itemStatusEnum +
                 '}';
     }
 }
